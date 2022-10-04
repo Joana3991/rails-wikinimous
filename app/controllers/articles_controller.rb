@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_action :set_article, only: %i[show edit]
+  before_action :set_article, only: %i[show edit update destroy]
 
   def new
     @article = Article.new
@@ -22,6 +22,18 @@ class ArticlesController < ApplicationController
   end
 
   def edit
+  end
+
+  def update
+    if @article.update(article_params)
+      redirect_to article_path(@article)
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+
   end
 
   private
